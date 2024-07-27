@@ -5,8 +5,15 @@
 <table>
     <thead>
     <tr>
-        <th (click)="sortUsers('name')" >Name</th>
-        <th (click)="sortUsers('email')">Email</th>
+        <th (click)="sortUsers('name')" >
+            <img *ngIf="sortingType === 'name' && sortingDirection === 'asc'" src="assets/icons/arrow-up.svg" alt="Ascending">
+            <img *ngIf="sortingType === 'name' && sortingDirection === 'des'" src="assets/icons/arrow-down.svg" alt="Descending">
+            Name</th>
+        <th (click)="sortUsers('email')">
+            <img *ngIf="sortingType === 'email' && sortingDirection === 'asc'" src="assets/icons/arrow-up.svg" alt="Ascending">
+            <img *ngIf="sortingType === 'email' && sortingDirection === 'des'" src="assets/icons/arrow-down.svg" alt="Descending">
+
+            Email</th>
         <th>Phone</th>
         <th>Website</th>
     </tr>

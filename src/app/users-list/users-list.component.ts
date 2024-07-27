@@ -21,9 +21,10 @@ import {Observable} from "rxjs";
 export class UsersListComponent implements OnInit{
 
     users$: Observable<Partial<User>[]>
+     sortingDirection: SortingDirection = 'asc';
+     sortingType: SortingType = 'name';
     private dialogRef: MatDialogRef<UserModalComponent> | null = null;
-    private sortingDirection: SortingDirection = 'asc';
-    private sortingType: SortingType = 'name';
+
 
     constructor(private usersService: UsersService, private dialog: MatDialog) {
     }
