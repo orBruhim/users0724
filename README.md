@@ -1,27 +1,58 @@
-# Users0724
+Frontend Developer Entrance Exam
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.2.
+This project demonstrates a responsive web page built using Angular (version 18) that fetches and displays user data from the JSONPlaceholder API,
+implements sorting, allows editing details through a modal, and ensures mobile-friendliness.
 
-## Development server
+Key Features:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Data Fetching and Display:
+Leverages Angular's HTTP client to fetch user data from https://jsonplaceholder.typicode.com/users.
+Presents the data in a user-friendly, responsive table with columns for name, email, phone, and website.
+Website links open in new tabs.
 
-## Code scaffolding
+Sorting Functionality:
+Users can sort data in ascending or descending order by clicking on name and email column headers.
+Implements sorting logic to efficiently rearrange data based on the selected criteria.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+User Details Editing:
+Double-clicking a row opens a modal for editing user details.
+Displays name, email (disabled), phone, and website.
+Name, phone, and website are editable.
 
-## Build
+Input Validation:
+Name field is required and accepts only English characters.
+Phone field is required and validates Israel mobile phone numbers (e.g., +972527021155).
+Website field accepts valid URLs.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Modal Handling:
+Employs Material Design's MatDialog to manage modal opening, closing, and user interactions.
 
-## Running unit tests
+Mobile-Friendly Design:
+Utilizes flexbox and CSS grid to adjust the layout and ensure responsiveness for various screen sizes.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Technologies Used:
 
-## Running end-to-end tests
+Angular 18
+Angular Material 
+JSONPlaceholder API
+HTML, CSS, JavaScript (TypeScript)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
+Running the Project:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Clone this repository.
+Install dependencies: npm install
+Start the development server: ng serve
+Further Enhancements:
+
+
+
+
+
+
+
+
+
+
+
+‫Gemini עלול לתת מידע לא מדויק, גם על אנשים, לכן חשוב לבדוק את העובדות בתשובות שלו. שמירה על הפרטיות שלך בממשקי Gemini
