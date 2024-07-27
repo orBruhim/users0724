@@ -1,0 +1,49 @@
+<div class="user-modal">
+    <h2 mat-dialog-title>Edit User</h2>
+    <mat-dialog-content class="mat-dialog-content">
+        <form class="form-wrapper" [formGroup]="userForm">
+            <mat-form-field appearance="fill">
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name">
+                @if (userForm.controls['name'].hasError('required')) {
+                    <mat-error>Name is required</mat-error>
+                }
+                @if (userForm.controls['name'].hasError('pattern')) {
+                    <mat-error>Only English characters allowed</mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" disabled>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Phone</mat-label>
+                <input matInput type="tel" formControlName="phone">
+                @if (userForm.controls['phone'].hasError('required')) {
+                    <mat-error>Phone is required</mat-error>
+                }
+                @if (userForm.controls['phone'].hasError('pattern')) {
+                    <mat-error>Invalid phone number</mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Website</mat-label>
+                <input matInput type="url" formControlName="website">
+                @if (userForm.controls['website'].hasError('pattern')) {
+                    <mat-error >Invalid website URL</mat-error>
+                }
+            </mat-form-field>
+        </form>
+    </mat-dialog-content>
+    @if (!userForm.valid && userForm.dirty) {
+        <mat-error class="not-valid" >Form is not valid</mat-error>
+    }
+    <mat-dialog-actions class="mat-dialog-actions" align="end">
+        <button mat-button (click)="close()">Cancel</button>
+        <button mat-flat-button (click)="saveUser()">Save</button>
+    </mat-dialog-actions>
+
+</div>

@@ -13,11 +13,11 @@
     </thead>
     <tbody>
     @for(user of usersSignal(); track user.id) {
-        <tr>
+        <tr (dblclick)="openEditUserModal(user)">
             <td>{{ user.name }}</td>
             <td>{{ user.email }}</td>
             <td>{{ user.phone }}</td>
-            <td ><a class="website" [href]="formatUrl(user.website)" target="_blank">{{ user.website }}</a></td>
+            <td ><a class="website" [href]="formatUrl(user.website)" target="_blank" >{{ user.website }}</a></td>
         </tr>
     }
 
