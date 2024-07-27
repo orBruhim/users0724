@@ -1,25 +1,26 @@
 <div class="header-wrapper">
-    <h2 class="title"> <u>Users</u></h2>
+    <h2 class="title"><u>Users</u></h2>
 </div>
 
 <table>
     <thead>
     <tr>
-        <th>Name</th>
-        <th>Email</th>
+        <th (click)="sortUsers('name')" >Name</th>
+        <th (click)="sortUsers('email')">Email</th>
         <th>Phone</th>
         <th>Website</th>
     </tr>
     </thead>
     <tbody>
-    @for(user of usersSignal(); track user.id) {
-        <tr (dblclick)="openEditUserModal(user)">
-            <td>{{ user.name }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.phone }}</td>
-            <td ><a class="website" [href]="formatUrl(user.website)" target="_blank" >{{ user.website }}</a></td>
-        </tr>
-    }
+        @for (user of (users$ | async); track user.id) {
+            <tr (dblclick)="openEditUserModal(user)">
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.phone }}</td>
+                <td><a class="website" [href]="formatUrl(user.website)" target="_blank">{{ user.website }}</a></td>
+            </tr>
+        }
+
 
     </tbody>
 </table>

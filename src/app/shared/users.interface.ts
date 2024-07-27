@@ -21,3 +21,6 @@ export interface User {
         bs: string;
     };
 }
+
+export type SortingDirection = 'asc' | 'des';
+export type SortingType = 'email' | 'name';
