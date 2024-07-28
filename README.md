@@ -41,6 +41,7 @@ HTML, CSS, JavaScript (TypeScript)
 Running the Project:
 
 Clone this repository.
+
 Install dependencies: npm install
+
 Start the development server: ng serve
-Further Enhancements:
