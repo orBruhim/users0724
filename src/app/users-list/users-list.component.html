@@ -2,32 +2,47 @@
     <h2 class="title"><u>Users</u></h2>
 </div>
 
-<table>
-    <thead>
-    <tr>
-        <th (click)="sortUsers('name')" >
-            <img *ngIf="sortingType === 'name' && sortingDirection === 'asc'" src="assets/icons/arrow-up.svg" alt="Ascending">
-            <img *ngIf="sortingType === 'name' && sortingDirection === 'des'" src="assets/icons/arrow-down.svg" alt="Descending">
-            Name</th>
-        <th (click)="sortUsers('email')">
-            <img *ngIf="sortingType === 'email' && sortingDirection === 'asc'" src="assets/icons/arrow-up.svg" alt="Ascending">
-            <img *ngIf="sortingType === 'email' && sortingDirection === 'des'" src="assets/icons/arrow-down.svg" alt="Descending">
+<table mat-table [dataSource]="users$ | async" class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef  (click)="sortUsers('name')">
+            Name
+            @if (sortingType === 'name' && sortingDirection === 'asc') {
+                <img src="assets/icons/arrow-up.svg" alt="arrow-up">
+            } @else {
+                @if (sortingType === 'name' && sortingDirection === 'desc') {
+                    <img src="assets/icons/arrow-down.svg" alt="arrow-down">
+                }
+            }
+        </th>
+        <td mat-cell *matCellDef="let user">{{ user.name }}</td>
+    </ng-container>
 
-            Email</th>
-        <th>Phone</th>
-        <th>Website</th>
-    </tr>
-    </thead>
-    <tbody>
-        @for (user of (users$ | async); track user.id) {
-            <tr (dblclick)="openEditUserModal(user)">
-                <td>{{ user.name }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.phone }}</td>
-                <td><a class="website" [href]="formatUrl(user.website)" target="_blank">{{ user.website }}</a></td>
-            </tr>
-        }
+    <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef (click)="sortUsers('email')">
+            Email
+            @if (sortingType === 'email' && sortingDirection === 'asc') {
+                <img src="assets/icons/arrow-up.svg" alt="arrow-up">
+            } @else {
+                @if (sortingType === 'email' && sortingDirection === 'desc') {
+                    <img src="assets/icons/arrow-down.svg" alt="arrow-down">
+                }
+            }
+        </th>
+        <td mat-cell *matCellDef="let user">{{ user.email }}</td>
+    </ng-container>
 
+    <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef>Phone</th>
+        <td mat-cell *matCellDef="let user">{{ user.phone }}</td>
+    </ng-container>
 
-    </tbody>
+    <ng-container matColumnDef="website">
+        <th mat-header-cell *matHeaderCellDef>Website</th>
+        <td mat-cell *matCellDef="let user">
+            <a class="website" [href]="formatUrl(user.website)" target="_blank">{{ user.website }}</a>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="openEditUserModal(row)"></tr>
 </table>

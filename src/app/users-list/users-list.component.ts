@@ -5,6 +5,8 @@ import {SortingDirection, SortingType, User} from "../shared/users.interface";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {UserModalComponent} from "../user-modal/user-modal.component";
 import {Observable} from "rxjs";
+import {MatTable, MatTableModule} from "@angular/material/table";
+import {CdkTableModule} from "@angular/cdk/table";
 
 @Component({
     selector: 'app-users-list',
@@ -12,32 +14,39 @@ import {Observable} from "rxjs";
     imports: [
         TitleCasePipe,
         CommonModule,
+        MatTable,
+        CdkTableModule,
+        MatTableModule
     ],
     templateUrl: './users-list.component.html',
     styleUrl: './users-list.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class UsersListComponent implements OnInit{
+export class UsersListComponent implements OnInit {
+
 
     users$: Observable<Partial<User>[]>
-     sortingDirection: SortingDirection = 'asc';
-     sortingType: SortingType = 'name';
+    displayedColumns= ['name', 'email', 'phone', 'website'];
+    sortingDirection: SortingDirection = 'asc';
+    sortingType: SortingType = 'name';
+
     private dialogRef: MatDialogRef<UserModalComponent> | null = null;
+
 
 
     constructor(private usersService: UsersService, private dialog: MatDialog) {
     }
 
-    ngOnInit() :void {
-        this.users$= this.usersService.getUsers(this.sortingType, this.sortingDirection);
+    ngOnInit(): void {
+        this.users$ = this.usersService.getUsers(this.sortingType, this.sortingDirection);
     }
 
     formatUrl(url: string): string {
         return url.startsWith('http://') || url.startsWith('https://') ? url : `http://${url}`;
     }
 
-    openEditUserModal(user: Partial<User>) {
+    openEditUserModal(user: Partial<User>) :void {
         if (this.dialogRef) {
             this.dialogRef.close();
         }
@@ -45,12 +54,10 @@ export class UsersListComponent implements OnInit{
         this.dialogRef = this.dialog.open(UserModalComponent, {
             data: user,
         });
-        this.dialogRef.afterClosed().subscribe(() => {
-            this.dialogRef.close();
-        })
+
     }
 
-    sortUsers(sortingType: SortingType) :void {
+    sortUsers(sortingType: SortingType): void {
         if (this.sortingType === sortingType) {
             this.sortingDirection = this.sortingDirection === 'asc' ? 'des' : 'asc';
         } else {
