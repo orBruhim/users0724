@@ -44,15 +44,3 @@ Clone this repository.
 Install dependencies: npm install
 Start the development server: ng serve
 Further Enhancements:
-
-
-
-
-
-
-
-
-
-
-
-‫Gemini עלול לתת מידע לא מדויק, גם על אנשים, לכן חשוב לבדוק את העובדות בתשובות שלו. שמירה על הפרטיות שלך בממשקי Gemini
