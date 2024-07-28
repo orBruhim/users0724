@@ -3,7 +3,7 @@ import {User} from "../shared/users.interface";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {
     MAT_DIALOG_DATA,
-    MatDialogActions,
+    MatDialogActions, MatDialogClose,
     MatDialogContent,
     MatDialogRef,
     MatDialogTitle
@@ -26,6 +26,7 @@ import {MatButtonModule} from '@angular/material/button';
         MatInputModule,
         CommonModule,
         MatButtonModule,
+        MatDialogClose,
     ],
     templateUrl: './user-modal.component.html',
     styleUrl: './user-modal.component.scss'
@@ -54,7 +55,9 @@ export class UserModalComponent implements OnInit {
     saveUser() :void {
         if (this.userForm.valid) {
             // Handle saving user data here- Send PUT request when there is a real BE
-            this.close()
+            const updatedUser = { ...this.userForm.value };
+            this.dialogRef.close(updatedUser);
+
         }
     }
 

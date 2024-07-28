@@ -14,6 +14,7 @@ export const appConfig: ApplicationConfig = {
         provideHttpClient(),
         provideAnimations(),
         {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}, provideAnimationsAsync(),
-        importProvidersFrom(MatNativeDateModule)
+        importProvidersFrom(MatNativeDateModule),
+        provideAnimationsAsync(),
     ]
 };

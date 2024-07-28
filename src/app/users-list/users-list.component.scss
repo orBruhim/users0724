@@ -20,6 +20,10 @@ table {
   font-size: 18px;
   text-align: left;
 
+  @media (max-width: 768px) {
+    overflow-x: scroll;
+  }
+
   .website{
     cursor: pointer;
   }
