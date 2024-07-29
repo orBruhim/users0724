@@ -4,7 +4,7 @@ import {UsersService} from "../shared/users.service";
 import {SortingDirection, SortingType, User} from "../shared/users.interface";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {UserModalComponent} from "../user-modal/user-modal.component";
-import {Observable} from "rxjs";
+import {map, Observable} from "rxjs";
 import {MatTable, MatTableModule} from "@angular/material/table";
 import {CdkTableModule} from "@angular/cdk/table";
 
@@ -39,7 +39,7 @@ export class UsersListComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.users$ = this.usersService.getUsers(this.sortingType, this.sortingDirection);
+        this.fetchUsers();
     }
 
     formatUrl(url: string): string {
@@ -56,14 +56,27 @@ export class UsersListComponent implements OnInit {
         });
 
     }
-
-    sortUsers(sortingType: SortingType): void {
+    onSortChange(sortingType: SortingType): void {
         if (this.sortingType === sortingType) {
             this.sortingDirection = this.sortingDirection === 'asc' ? 'des' : 'asc';
         } else {
             this.sortingType = sortingType;
             this.sortingDirection = 'asc';
         }
-        this.users$ = this.usersService.getUsers(this.sortingType, this.sortingDirection);
+        this.fetchUsers();
+    }
+
+    private fetchUsers(): void {
+        this.users$ = this.usersService.getUsers().pipe(
+            map(users => this.sortUsers(users, this.sortingType, this.sortingDirection))
+        );
+    }
+
+    private sortUsers(users: Partial<User>[], sortingType: SortingType, sortingDirection: SortingDirection): Partial<User>[] {
+        return users.sort((a: Partial<User>, b: Partial<User>) =>
+            sortingDirection === 'asc'
+                ? a[sortingType].localeCompare(b[sortingType])
+                : b[sortingType].localeCompare(a[sortingType])
+        );
     }
 }

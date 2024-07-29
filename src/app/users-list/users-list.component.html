@@ -4,7 +4,7 @@
 
 <table mat-table [dataSource]="users$ | async" class="mat-elevation-z8">
     <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef  (click)="sortUsers('name')">
+        <th mat-header-cell *matHeaderCellDef  (click)="onSortChange('name')">
             Name
             @if (sortingType === 'name' && sortingDirection === 'asc') {
                 <img src="assets/icons/arrow-up.svg" alt="arrow-up">
@@ -18,7 +18,7 @@
     </ng-container>
 
     <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef (click)="sortUsers('email')">
+        <th mat-header-cell *matHeaderCellDef (click)="onSortChange('email')">
             Email
             @if (sortingType === 'email' && sortingDirection === 'asc') {
                 <img src="assets/icons/arrow-up.svg" alt="arrow-up">
